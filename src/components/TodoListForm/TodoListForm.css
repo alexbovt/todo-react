@@ -1,0 +1,10 @@
+.todo-list-form {
+    margin-top: 10px;
+}
+
+.todo-list-form input{
+    width: auto;
+    flex-grow: 1;
+    margin-right: 3px;
+}
+
