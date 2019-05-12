@@ -3,19 +3,38 @@ import React, { Component } from "react";
 import "./TodoListForm.css";
 
 export default class TodoListForm extends Component {
-  render() {
-    const { onItemAdded } = this.props;
+  state = {
+    label: ""
+  };
 
+  onLabelChange = e => {
+    this.setState({
+      label: e.target.value
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    if (this.state.label.trim()) {
+      this.props.onItemAdded(this.state.label);
+      this.setState({
+        label: ""
+      });
+    } else console.log("Empty");
+  };
+
+  render() {
     return (
-      <div className="todo-list-form d-flex">
-        <input className="form-control" type="text" />
-        <button
-          className="btn btn-outline-secondary"
-          onClick={() => onItemAdded("New Todo Item")}
-        >
-          Add Todo Item
-        </button>
-      </div>
+      <form className="todo-list-form d-flex" onSubmit={this.onSubmit}>
+        <input
+          className="form-control"
+          type="text"
+          onChange={this.onLabelChange}
+          placeholder="What needs to be done"
+          value={this.state.label}
+        />
+        <button className="btn btn-outline-secondary">Add Todo Item</button>
+      </form>
     );
   }
 }
